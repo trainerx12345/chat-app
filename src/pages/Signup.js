@@ -11,26 +11,43 @@ const Signup = () => {
 	const handleRegister = async (e) => {
 		console.log('submitted');
 		e.preventDefault();
-
+		console.log(formData);
 		try {
 			const response = await axios.post(
 				'https://mechatapp-api.onrender.com/api/v1/auth/register',
 				{
-					formData,
+					email: formData.email,
+					password: formData.password,
+					name: formData.name,
+					phoneNumber: formData.phoneNo,
+					avatar: formData.url,
 				},
 			);
 			console.log(response);
-			const success = response.status === 200;
-			if (success) navigate('/home');
+			const success = response.status === 201;
+			if (success) navigate('/chat');
 		} catch (err) {
 			console.log(err);
+			const status = err.response.status;
+			if (status === 409) {
+				console.log('User Already exist');
+				alert('Email is already taken.');
+				return;
+			}
+			if (status === 400) {
+				console.log('Error in creating an account');
+				return;
+			}
+			if (status === 500) {
+				console.log('Server Error');
+				return;
+			}
 		}
 	};
-
 	setIsLogin(true);
 	setIsSignUp(false);
 	return (
-		<section className='container mx-auto min-h-[800px] mb-14'>
+		<section className='container mx-auto min-h-[800px] mb-14 w-5/12'>
 			<div className='flex-1 w-full px-6 py-8 mb-8 bg-white border border-gray-300 rounded-lg '>
 				{/* FORM */}
 
@@ -103,7 +120,6 @@ const Signup = () => {
 						onChange={handleChange}
 						value={formData.retypePassword}
 						name='retypePassword'
-						phoneNo
 					/>
 					<label htmlFor='name'>Phone No.</label>
 					<input
@@ -116,8 +132,8 @@ const Signup = () => {
 						name='phoneNo'
 					/>
 					<div className='flex gap-x-2'>
-						<button className='flex items-center justify-center w-full p-4 text-sm text-center text-white transition rounded bg-violet-700 hover:bg-violet-800 hover:shadow-lg '>
-							Sign-up
+						<button className='flex items-center justify-center w-3/12 p-4 mx-auto text-sm text-center text-white transition rounded bg-violet-700 hover:bg-violet-800 hover:shadow-lg '>
+							Sign up
 						</button>
 					</div>
 				</form>

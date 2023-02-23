@@ -21,7 +21,6 @@ const ChatContextProvider = ({ children }) => {
 	});
 
 	const handleChange = (e) => {
-		console.log('e', e);
 		const value = e.target.value;
 		const name = e.target.name;
 
