@@ -11,10 +11,14 @@ const Signup = () => {
 	const handleRegister = async (e) => {
 		console.log('submitted');
 		e.preventDefault();
+
 		try {
-			const response = await axios.put('http://localhost:8000/user', {
-				formData,
-			});
+			const response = await axios.post(
+				'https://mechatapp-api.onrender.com/api/v1/auth/register',
+				{
+					formData,
+				},
+			);
 			console.log(response);
 			const success = response.status === 200;
 			if (success) navigate('/home');
@@ -27,7 +31,7 @@ const Signup = () => {
 	setIsSignUp(false);
 	return (
 		<section className='container mx-auto min-h-[800px] mb-14'>
-			<div className='flex-1 bg-white w-full mb-8 border border-gray-300 rounded-lg px-6 py-8 '>
+			<div className='flex-1 w-full px-6 py-8 mb-8 bg-white border border-gray-300 rounded-lg '>
 				{/* FORM */}
 
 				<form
@@ -42,15 +46,15 @@ const Signup = () => {
 							id='url'
 							onChange={handleChange}
 							required={true}
-							className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm  '
+							className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						/>
-						<div className='container  rounded-full flex flex-col justify-center items-center'>
+						<div className='container flex flex-col items-center justify-center rounded-full'>
 							{formData.url && (
 								<img
 									src={formData.url}
 									alt='profile pic preview'
 									width={250}
-									className=' rounded-full'
+									className='rounded-full '
 								/>
 							)}
 						</div>
@@ -58,45 +62,61 @@ const Signup = () => {
 
 					<label htmlFor='name'>Name</label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='text'
 						placeholder='Name*'
+						onChange={handleChange}
+						value={formData.name}
+						name='name'
 						required={true}
 					/>
 
-					<label htmlFor='name'>Email</label>
+					<label htmlFor='email'>Email</label>
 
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='email'
 						placeholder='Email*'
 						required={true}
+						onChange={handleChange}
+						value={formData.email}
+						name='email'
 					/>
-					<label htmlFor='name'>Password</label>
+					<label htmlFor='password'>Password</label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='password'
 						placeholder='Password*'
 						maxLength={8}
 						required={true}
+						onChange={handleChange}
+						value={formData.password}
+						name='password'
 					/>
 					<label htmlFor='name'>Re-type Password</label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='password'
 						placeholder='Re-type Password*'
 						maxLength={8}
 						required={true}
+						onChange={handleChange}
+						value={formData.retypePassword}
+						name='retypePassword'
+						phoneNo
 					/>
 					<label htmlFor='name'>Phone No.</label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='text'
 						placeholder='Phone*'
 						required={true}
+						onChange={handleChange}
+						value={formData.phoneNo}
+						name='phoneNo'
 					/>
-					<div className='gap-x-2 flex'>
-						<button className='bg-violet-700 hover:bg-violet-800 hover:shadow-lg text-white rounded p-4 text-sm w-full transition flex justify-center items-center text-center '>
+					<div className='flex gap-x-2'>
+						<button className='flex items-center justify-center w-full p-4 text-sm text-center text-white transition rounded bg-violet-700 hover:bg-violet-800 hover:shadow-lg '>
 							Sign-up
 						</button>
 					</div>
