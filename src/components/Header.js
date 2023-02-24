@@ -5,7 +5,7 @@ import Logo from '../assets/img/logo.svg';
 import { ChatContext } from './ChatContext';
 
 const Header = () => {
-	const { profile, formData } = useContext(ChatContext);
+	const { formData,setUserOffline } = useContext(ChatContext);
 
 	return (
 		<header className='py-3 mb-2 lg:h-[75px]'>
@@ -20,21 +20,7 @@ const Header = () => {
 					<Link to='/'>meChat </Link>
 				</span>
 				<div className='flex items-center gap-3 '>
-					<Link
-						className='px-4 py-3 transition border rounded-lg hover:text-white hover:bg-violet-800 outline-1 border-violet-200'
-						to='/login'
-					>
-						Log In
-					</Link>
-
-					<Link
-						className='px-4 py-3 text-white transition rounded-lg hover:bg-white hover:text-violet-700 bg-violet-800'
-						to='/signup'
-					>
-						Sign up
-					</Link>
-
-					{profile ? (
+					{formData.isOnline ? (
 						<>
 							<Link
 								className='px-4 py-3 text-white transition rounded-lg hover:bg-white hover:text-violet-700 bg-violet-800'
@@ -45,12 +31,26 @@ const Header = () => {
 							<Link
 								className='px-4 py-3 text-white transition rounded-lg hover:bg-white hover:text-violet-700 bg-violet-800'
 								to={`/`}
+								onClick={setUserOffline}
 							>
 								Logout
 							</Link>
 						</>
 					) : (
-						<></>
+						<>
+							<Link
+								className='px-4 py-3 transition border rounded-lg hover:text-white hover:bg-violet-800 outline-1 border-violet-200'
+								to='/login'
+							>
+								Log In
+							</Link>
+							<Link
+								className='px-4 py-3 text-white transition rounded-lg hover:bg-white hover:text-violet-700 bg-violet-800'
+								to='/signup'
+							>
+								Sign up
+							</Link>
+						</>
 					)}
 				</div>
 			</div>

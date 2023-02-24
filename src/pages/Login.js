@@ -44,7 +44,6 @@ const Login = () => {
 	};
 	useEffect(() => {
 		localStorage.removeItem('UserId');
-		console.log(formData);
 		resetForm();
 	}, []);
 	return (

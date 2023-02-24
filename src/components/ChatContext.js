@@ -7,7 +7,6 @@ export const ChatContext = createContext();
 const ChatContextProvider = ({ children }) => {
 	const userid = localStorage.getItem('UserId');
 	const [isLogin, setIsLogin] = useState(false);
-	const [profile, setProfile] = useState(false);
 	const [textArea, setTextArea] = useState('');
 	const [convo, setConvo] = useState(true);
 	const [formData, setFormData] = useState({
@@ -18,6 +17,7 @@ const ChatContextProvider = ({ children }) => {
 		email: '',
 		phoneNo: '',
 		contacts: [],
+		isOnline: false,
 	});
 
 	const resetForm = () => {
@@ -29,6 +29,7 @@ const ChatContextProvider = ({ children }) => {
 			email: '',
 			phoneNo: '',
 			contacts: [],
+			isOnline: false,
 		});
 	};
 	const setData = (response) => {
@@ -38,7 +39,7 @@ const ChatContextProvider = ({ children }) => {
 			password: response.password,
 			email: response.email,
 			phoneNo: response.phoneNumber,
-
+			isOnline: response.isOnline,
 			contacts: response.contacts,
 		});
 		localStorage.setItem('UserId', response._id);
@@ -54,6 +55,38 @@ const ChatContextProvider = ({ children }) => {
 			const success = response.status === 200;
 			if (success) {
 				setData(response.data);
+			}
+		} catch (err) {
+			console.log(err);
+			const status = err.response.status;
+			if (status === 404) {
+				console.log('No user Exist');
+				return;
+			}
+			if (status === 400) {
+				console.log('Incorrect password');
+				alert('Password is incorrect');
+				return;
+			}
+			if (status === 500) {
+				console.log('Server Error');
+				alert('server error');
+				return;
+			}
+		}
+	};
+	const setUserOffline = async () => {
+		try {
+			const response = await axios.put(
+				`https://mechatapp-api.onrender.com/api/v1/auth/offline/${userid}`,
+			);
+
+			const success = response.status === 204;
+			console.log(response);
+			if (success) {
+				//	setData(response.data);
+				// localStorage.removeItem('UserId');
+				// resetForm();
 			}
 		} catch (err) {
 			console.log(err);
@@ -95,7 +128,6 @@ const ChatContextProvider = ({ children }) => {
 				handleChange,
 				isLogin,
 				setIsLogin,
-				profile,
 				addMessageHandler,
 				textArea,
 				setTextArea,
@@ -104,6 +136,7 @@ const ChatContextProvider = ({ children }) => {
 				convo,
 				userid,
 				fetchUser,
+				setUserOffline,
 			}}
 		>
 			{children}

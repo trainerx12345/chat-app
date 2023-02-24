@@ -17,7 +17,7 @@ const Messenger = () => {
 
 	return (
 		<>
-			<div className='container flex flex-col w-full mx-auto bg-violet-200 h-full sm:h-[500px] gap-2 sm:py-3'>
+			<div className='container flex flex-col w-full sm:mx-auto bg-violet-200 h-full sm:h-[500px] gap-2 sm:py-3'>
 				<div className='flex flex-col sm:gap-3 sm:flex-row sm:h-full sm:[h-1000px]'>
 					<div className='w-full sm:max-w-[250px] bg-green-100'>
 						<Contacts />
