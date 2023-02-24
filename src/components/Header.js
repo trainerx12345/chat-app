@@ -5,43 +5,35 @@ import Logo from '../assets/img/logo.svg';
 import { ChatContext } from './ChatContext';
 
 const Header = () => {
-	const { isLogin, isSignUp, Visibility, profile, formData } =
-		useContext(ChatContext);
+	const { profile, formData } = useContext(ChatContext);
 
 	return (
-		<header className='py-6 mb-3 header-b'>
-			<div className='container flex items-center justify-between mx-auto'>
+		<header className='py-3 mb-2 lg:h-[75px]'>
+			<div className='container flex items-center justify-between mx-auto '>
 				<Link to='/'>
 					<img
 						src={Logo}
 						alt=''
 					/>
-					{Visibility(true)}
 				</Link>
 				<span>
 					<Link to='/'>meChat </Link>
 				</span>
-				<div className='flex items-center gap-6 '>
-					{isLogin ? (
-						<Link
-							className='px-4 py-3 transition hover:text-white	hover:bg-violet-800 rounded-lg outline-1 border border-violet-200'
-							to='/login'
-						>
-							Log In
-						</Link>
-					) : (
-						<></>
-					)}
-					{isSignUp ? (
-						<Link
-							className='px-4 py-3 text-white transition rounded-lg hover:bg-white hover:text-violet-700 bg-violet-800'
-							to='/signup'
-						>
-							Sign up
-						</Link>
-					) : (
-						<></>
-					)}
+				<div className='flex items-center gap-3 '>
+					<Link
+						className='px-4 py-3 transition border rounded-lg hover:text-white hover:bg-violet-800 outline-1 border-violet-200'
+						to='/login'
+					>
+						Log In
+					</Link>
+
+					<Link
+						className='px-4 py-3 text-white transition rounded-lg hover:bg-white hover:text-violet-700 bg-violet-800'
+						to='/signup'
+					>
+						Sign up
+					</Link>
+
 					{profile ? (
 						<>
 							<Link

@@ -6,10 +6,10 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Login from './pages/Login.js';
 import Signup from './pages/Signup.js';
-import Chat from './pages/Chat.js';
+import Messenger from './pages/Messenger.js';
 function App() {
 	return (
-		<div className='max-w[1440px] mx-auto bg-white'>
+		<div className='max-w[1440px] mx-auto bg-white h-full min-h-screen'>
 			<Header />
 			<Routes>
 				<Route
@@ -22,8 +22,8 @@ function App() {
 					element={<Profile />}
 				/>
 				<Route
-					path='/chat'
-					element={<Chat />}
+					path='/messenger'
+					element={<Messenger />}
 				/>
 				<Route
 					path='/signup'
@@ -33,8 +33,12 @@ function App() {
 					path='/login'
 					element={<Login />}
 				/>
+				<Route
+					path='*'
+					element={<Home />}
+				/>
 			</Routes>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

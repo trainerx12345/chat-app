@@ -1,13 +1,51 @@
+import { BiSearch } from 'react-icons/bi';
 const Chats = () => {
+	const keyEnter = (e) => {
+		return e.keyCode === 13 ? searchHandler() : '';
+	};
+	const searchHandler = () => {
+		alert('Search me?');
+	};
 	return (
-		<div className='h-screen p-2'>
-			<div className='flex justify-between '>
-				<div className='leading-3 p-3 strong font-semibold'>Chats</div>
-				<button className='px-4 py-2 text-white transition rounded-lg hover:bg-white hover:text-violet-700 bg-violet-800 self-end text-sm'>
-					New Message
-				</button>
+		<>
+			<div className='h-full px-2 sm:p-2'>
+				<div className='flex flex-col items-center justify-center'>
+					<div className='flex flex-row justify-center items-center border border-gray-300 rounded bg-white'>
+						<input
+							className='w-full px-1 text-sm   outline-none focus:border-violet-700 h-10'
+							type='text'
+							placeholder='Search Contact'
+							onKeyDown={keyEnter}
+						/>
+						<button
+							className=' outline-none'
+							onClick={searchHandler}
+						>
+							<BiSearch className='w-10  px-1 text-sm border  outline-none  h-10' />
+						</button>
+					</div>
+				</div>
+
+				<div className='flex flex-col gap-y-2'>
+					<div className='flex flex-row gap-1 mx-auto'>
+						<img
+							src=''
+							alt=''
+						/>
+						<h1>picture</h1>
+						<p>Name</p>
+					</div>
+					<div className='flex  flex-row gap-1 mx-auto'>
+						<img
+							src=''
+							alt=''
+						/>
+						<h1>picture</h1>
+						<p>Name</p>
+					</div>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 export default Chats;

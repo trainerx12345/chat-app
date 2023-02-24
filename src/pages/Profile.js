@@ -3,10 +3,10 @@ import { useContext } from 'react';
 import { ChatContext } from '../components/ChatContext';
 
 const Profile = () => {
-	const { Visibility, formData } = useContext(ChatContext);
-	Visibility(false);
+	const { formData } = useContext(ChatContext);
+
 	return (
-		<section className='container mx-auto min-h-[800px] mb-14 bg'>
+		<section className='container mx-auto min-h-[800px] lg:mt-20'>
 			<div className='flex-1 w-full px-6 py-8 mb-8 bg-white border border-gray-300 rounded-lg'>
 				{/* AGENT */}
 				<div className='flex items-center mb-8 gap-x-4'>

@@ -6,10 +6,10 @@ export const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
 	const [user, setUser] = useState('');
-	const [isLogin, setIsLogin] = useState(true);
-	const [isSignUp, setIsSignUp] = useState(true);
+	const [isLogin, setIsLogin] = useState(false);
 	const [profile, setProfile] = useState(false);
 	const [textArea, setTextArea] = useState('');
+	const [convo, setConvo] = useState(true);
 	const [formData, setFormData] = useState({
 		url: '',
 		name: '',
@@ -19,6 +19,7 @@ const ChatContextProvider = ({ children }) => {
 		phoneNo: '',
 		user_id: localStorage.UserId,
 	});
+
 	const resetForm = () => {
 		setFormData({
 			url: '',
@@ -28,6 +29,16 @@ const ChatContextProvider = ({ children }) => {
 			email: '',
 			phoneNo: '',
 			user_id: '',
+		});
+	};
+	const setData = (response) => {
+		setFormData({
+			url: response.data.user.avatar,
+			name: response.data.user.name,
+			password: response.data.user.password,
+			email: response.data.user.email,
+			phoneNo: response.data.user.phoneNumber,
+			user_id: response.data.userId,
 		});
 	};
 	const handleChange = (e) => {
@@ -40,14 +51,6 @@ const ChatContextProvider = ({ children }) => {
 		}));
 	};
 
-	const loginUser = () => {};
-	const Visibility = (isVisible) => {
-		setIsLogin(isVisible);
-		setIsSignUp(isVisible);
-		isLogin === false && isSignUp === false
-			? setProfile(true)
-			: setProfile(false);
-	};
 	const addMessageHandler = (message) => {};
 
 	return (
@@ -60,15 +63,13 @@ const ChatContextProvider = ({ children }) => {
 				handleChange,
 				isLogin,
 				setIsLogin,
-				isSignUp,
-				setIsSignUp,
-				Visibility,
-				loginUser,
 				profile,
 				addMessageHandler,
 				textArea,
 				setTextArea,
 				resetForm,
+				setData,
+				convo,
 			}}
 		>
 			{children}

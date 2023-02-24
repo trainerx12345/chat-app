@@ -1,17 +1,24 @@
-import { useState, useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import { ChatContext } from '../components/ChatContext';
 const Signup = () => {
 	const navigate = useNavigate();
-	const { formData, setFormData, handleChange, setIsLogin, setIsSignUp,resetFormData } =
-		useContext(ChatContext);
+	const { formData, handleChange, resetForm } = useContext(ChatContext);
+	useEffect(() => {
+		resetForm();
+	}, []);
 
 	const handleRegister = async (e) => {
 		console.log('submitted');
 		e.preventDefault();
-		console.log(formData);
+
+		if (formData.password !== formData.retypePassword) {
+			alert('Incorrect password');
+			return;
+		}
+
 		try {
 			const response = await axios.post(
 				'https://mechatapp-api.onrender.com/api/v1/auth/register',
@@ -25,7 +32,7 @@ const Signup = () => {
 			);
 			console.log(response);
 			const success = response.status === 201;
-			if (success) navigate('/chat');
+			if (success) navigate('/messenger');
 		} catch (err) {
 			console.log(err);
 			const status = err.response.status;
@@ -36,25 +43,30 @@ const Signup = () => {
 			}
 			if (status === 400) {
 				console.log('Error in creating an account');
+				alert('Error in fetching data');
 				return;
 			}
 			if (status === 500) {
 				console.log('Server Error');
+				alert('server error');
 				return;
 			}
 		}
 	};
 	return (
-		<section className='container mx-auto min-h-[800px] mb-14'>
-			<div className='flex-1 w-full px-6 py-8 mb-8 bg-white border border-gray-300 rounded-lg '>
+		<section className='container mx-auto min-h-[800px]  lg:mt-10'>
+			<div className='flex-1 max-w-[600px] mx-auto px-6 py-8 bg-white border border-gray-300 rounded-lg '>
 				{/* FORM */}
 
 				<form
-					className='flex flex-col gap-y-3'
+					className='flex flex-col gap-y-2'
 					onSubmit={handleRegister}
 				>
-					<div>
-						<label htmlFor='url'>Enter a valid URL</label>
+					<h2 className='text-2xl lg:text-[35px] font-semibold leading-none text-center text-violet-700'>
+						Register
+					</h2>
+					<div className='flex flex-col gap-4 '>
+						<label htmlFor='url'>Enter a image URL</label>
 						<input
 							type='url'
 							name='url'
@@ -63,7 +75,7 @@ const Signup = () => {
 							required={true}
 							className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						/>
-						<div className='container flex flex-col items-center justify-center rounded-full'>
+						<div className='container flex flex-col items-center justify-center p-1 rounded-full'>
 							{formData.url && (
 								<img
 									src={formData.url}
@@ -102,7 +114,7 @@ const Signup = () => {
 						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='password'
 						placeholder='Password*'
-						maxLength={8}
+						minLength={8}
 						required={true}
 						onChange={handleChange}
 						value={formData.password}
@@ -113,7 +125,7 @@ const Signup = () => {
 						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='password'
 						placeholder='Re-type Password*'
-						maxLength={8}
+						minLength={8}
 						required={true}
 						onChange={handleChange}
 						value={formData.retypePassword}
@@ -130,7 +142,7 @@ const Signup = () => {
 						name='phoneNo'
 					/>
 					<div className='flex gap-x-2'>
-						<button className='flex items-center justify-center w-3/12 p-4 mx-auto text-sm text-center text-white transition rounded bg-violet-700 hover:bg-violet-800 hover:shadow-lg '>
+						<button className='flex items-center justify-center p-4 mx-auto text-sm text-center text-white transition rounded bg-violet-700 hover:bg-violet-800 hover:shadow-lg '>
 							Sign up
 						</button>
 					</div>

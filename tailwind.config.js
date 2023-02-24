@@ -17,6 +17,11 @@ module.exports = {
 			xl: '1234px',
 		},
 		extend: {
+			height: {
+				sm: '60vh',
+				md: '65vh',
+				xl: '90vh',
+			},
 			colors: {
 				primary: '#101828',
 				secondary: '#7F56D9',

@@ -4,15 +4,15 @@ import { ChatContext } from '../components/ChatContext';
 import Image from '../assets/img/banner.jpg';
 
 const Home = () => {
-	const { Visibility } = useContext(ChatContext);
-	Visibility(true);
+	const {} = useContext(ChatContext);
+
 	const navigate = useNavigate();
 	const login = () => {
 		navigate('/login');
 	};
 	return (
-		<section className='h-full max-h-[740px] mb-8 xl:mb-24'>
-			<div className='flex flex-col lg:flex-row'>
+		<section className='container h-xl flex justify-center items-center'>
+			<div className='flex flex-col lg:flex-row '>
 				<div className='lg:ml-8 xl:ml-[135px] flex flex-col items-center lg:items-start text-center lg:text-left  justify-center flex-1 px-4 lg:px-0'>
 					<h1 className='text-4xl lg:text-[58px] font-semibold leading-none mb-6'>
 						meChat

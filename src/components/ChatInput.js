@@ -14,11 +14,11 @@ const ChatInput = () => {
 	};
 
 	return (
-		<div className='flex flex-col w-full justify-end items-end'>
+		<div className='flex flex-row w-full justify-end items-end'>
 			<textarea
 				value={textArea}
 				onChange={(e) => setTextArea(e.target.value)}
-				className='border border-gray-300 focus::border-violet-700 outline-none resize-none rounded w-full p-4 h-36 text-sm text-gray-800 '
+				className='border border-gray-300 focus::border-violet-700 outline-none resize-none rounded w-full p-4 h-[50px] text-sm text-gray-800 '
 				placeholder='Message*'
 			/>
 			<button
