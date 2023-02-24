@@ -12,14 +12,24 @@ const ChatContextProvider = ({ children }) => {
 	const [textArea, setTextArea] = useState('');
 	const [formData, setFormData] = useState({
 		url: '',
-		name: 'Samuel Corpuz',
+		name: '',
 		password: '',
 		retypePassword: '',
 		email: '',
 		phoneNo: '',
 		user_id: localStorage.UserId,
 	});
-
+	const resetForm = () => {
+		setFormData({
+			url: '',
+			name: '',
+			password: '',
+			retypePassword: '',
+			email: '',
+			phoneNo: '',
+			user_id: '',
+		});
+	};
 	const handleChange = (e) => {
 		const value = e.target.value;
 		const name = e.target.name;
@@ -58,6 +68,7 @@ const ChatContextProvider = ({ children }) => {
 				addMessageHandler,
 				textArea,
 				setTextArea,
+				resetForm,
 			}}
 		>
 			{children}

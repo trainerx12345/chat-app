@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChatContext } from '../components/ChatContext';
 const Signup = () => {
 	const navigate = useNavigate();
-	const { formData, setFormData, handleChange, setIsLogin, setIsSignUp } =
+	const { formData, setFormData, handleChange, setIsLogin, setIsSignUp,resetFormData } =
 		useContext(ChatContext);
 
 	const handleRegister = async (e) => {
@@ -44,10 +44,8 @@ const Signup = () => {
 			}
 		}
 	};
-	setIsLogin(true);
-	setIsSignUp(false);
 	return (
-		<section className='container mx-auto min-h-[800px] mb-14 w-5/12'>
+		<section className='container mx-auto min-h-[800px] mb-14'>
 			<div className='flex-1 w-full px-6 py-8 mb-8 bg-white border border-gray-300 rounded-lg '>
 				{/* FORM */}
 

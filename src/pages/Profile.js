@@ -6,17 +6,17 @@ const Profile = () => {
 	const { Visibility, formData } = useContext(ChatContext);
 	Visibility(false);
 	return (
-		<section className='container mx-auto min-h-[800px] mb-14 bg w-9/12'>
-			<div className='flex-1 bg-white w-full mb-8 border border-gray-300 rounded-lg px-6 py-8'>
+		<section className='container mx-auto min-h-[800px] mb-14 bg'>
+			<div className='flex-1 w-full px-6 py-8 mb-8 bg-white border border-gray-300 rounded-lg'>
 				{/* AGENT */}
-				<div className='flex items-center gap-x-4 mb-8'>
+				<div className='flex items-center mb-8 gap-x-4'>
 					<div className='w-20 h-20 p-1 border border-gray-300 rounded-full'>
 						<img
 							src={formData.image}
 							alt=''
 						/>
 					</div>
-					<div className='font-bold text-lg '>
+					<div className='text-lg font-bold '>
 						<div>{formData.name}</div>
 					</div>
 				</div>
@@ -24,7 +24,7 @@ const Profile = () => {
 				<form className='flex flex-col gap-y-5'>
 					<label htmlFor='name'>Name</label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='text'
 						placeholder='Name*'
 						required={true}
@@ -33,14 +33,14 @@ const Profile = () => {
 					<label htmlFor='name'>Email</label>
 
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='email'
 						placeholder='Email*'
 						required={true}
 					/>
 					<label htmlFor='name'>Password</label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='password'
 						placeholder='Password*'
 						maxLength={8}
@@ -48,7 +48,7 @@ const Profile = () => {
 					/>
 					<label htmlFor='name'>Re-type Password</label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='password'
 						placeholder='Re-type Password*'
 						maxLength={8}
@@ -56,13 +56,13 @@ const Profile = () => {
 					/>
 					<label htmlFor='name'>Phone No.</label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='text'
 						placeholder='Phone*'
 						required={true}
 					/>
-					<div className='gap-x-2 flex'>
-						<button className='bg-violet-700 hover:bg-violet-800 hover:shadow-lg text-white rounded p-4 text-sm transition flex justify-center items-center text-center w-50 m-auto'>
+					<div className='flex gap-x-2'>
+						<button className='flex items-center justify-center p-4 m-auto text-sm text-center text-white transition rounded bg-violet-700 hover:bg-violet-800 hover:shadow-lg w-50'>
 							Update
 						</button>
 					</div>

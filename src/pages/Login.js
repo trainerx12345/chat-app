@@ -14,15 +14,15 @@ const Login = () => {
 	setIsLogin(false);
 	setIsSignUp(true);
 	return (
-		<div className='container mx-auto min-h-[800px] mb-14 w-2/5'>
-			<div className='flex-1 bg-white w-full mb-8 border border-gray-300 rounded-lg px-6 py-8'>
+		<div className='container mx-auto min-h-[800px] mb-14'>
+			<div className='flex-1 w-full px-6 py-8 mb-8 bg-white border border-gray-300 rounded-lg'>
 				<form
 					className='flex flex-col gap-y-5 '
 					onSubmit={loginUser}
 				>
 					<label htmlFor='email'>Email </label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='email'
 						placeholder='Email*'
 						onChange={handleChange}
@@ -32,7 +32,7 @@ const Login = () => {
 					/>
 					<label htmlFor='password'>Password </label>
 					<input
-						className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm '
+						className='w-full px-4 text-sm border border-gray-300 rounded outline-none focus:border-violet-700 h-14 '
 						type='password'
 						placeholder='Password*'
 						value={formData.password}
@@ -40,7 +40,7 @@ const Login = () => {
 						name='password'
 						id='password'
 					/>
-					<button className='px-4 py-3 text-white transition rounded-lg hover:bg-white hover:text-violet-700 bg-violet-800  w-1/2 mx-auto'>
+					<button className='w-1/2 px-4 py-3 mx-auto text-white transition rounded-lg hover:bg-white hover:text-violet-700 bg-violet-800'>
 						Login
 					</button>
 				</form>
