@@ -20,7 +20,7 @@ const Login = () => {
 			);
 			const success = response.status === 201;
 			if (success) {
-				setData(response);
+				setData(response.data.user);
 				navigate('/messenger');
 			}
 		} catch (err) {
@@ -43,6 +43,7 @@ const Login = () => {
 		}
 	};
 	useEffect(() => {
+		localStorage.removeItem('UserId');
 		console.log(formData);
 		resetForm();
 	}, []);

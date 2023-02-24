@@ -5,7 +5,7 @@ import axios from 'axios';
 export const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
-	const [user, setUser] = useState('');
+	const userid = localStorage.getItem('UserId');
 	const [isLogin, setIsLogin] = useState(false);
 	const [profile, setProfile] = useState(false);
 	const [textArea, setTextArea] = useState('');
@@ -17,7 +17,7 @@ const ChatContextProvider = ({ children }) => {
 		retypePassword: '',
 		email: '',
 		phoneNo: '',
-		user_id: localStorage.UserId,
+		contacts: [],
 	});
 
 	const resetForm = () => {
@@ -28,19 +28,53 @@ const ChatContextProvider = ({ children }) => {
 			retypePassword: '',
 			email: '',
 			phoneNo: '',
-			user_id: '',
+			contacts: [],
 		});
 	};
 	const setData = (response) => {
 		setFormData({
-			url: response.data.user.avatar,
-			name: response.data.user.name,
-			password: response.data.user.password,
-			email: response.data.user.email,
-			phoneNo: response.data.user.phoneNumber,
-			user_id: response.data.userId,
+			url: response.avatar,
+			name: response.name,
+			password: response.password,
+			email: response.email,
+			phoneNo: response.phoneNumber,
+
+			contacts: response.contacts,
 		});
+		localStorage.setItem('UserId', response._id);
 	};
+
+	const fetchUser = async () => {
+		try {
+			const response = await axios.get(
+				`https://mechatapp-api.onrender.com/api/v1/user/${userid}`,
+			);
+			console.log(response.data);
+
+			const success = response.status === 200;
+			if (success) {
+				setData(response.data);
+			}
+		} catch (err) {
+			console.log(err);
+			const status = err.response.status;
+			if (status === 404) {
+				console.log('No user Exist');
+				return;
+			}
+			if (status === 400) {
+				console.log('Incorrect password');
+				alert('Password is incorrect');
+				return;
+			}
+			if (status === 500) {
+				console.log('Server Error');
+				alert('server error');
+				return;
+			}
+		}
+	};
+
 	const handleChange = (e) => {
 		const value = e.target.value;
 		const name = e.target.name;
@@ -56,8 +90,6 @@ const ChatContextProvider = ({ children }) => {
 	return (
 		<ChatContext.Provider
 			value={{
-				user,
-				setUser,
 				formData,
 				setFormData,
 				handleChange,
@@ -70,6 +102,8 @@ const ChatContextProvider = ({ children }) => {
 				resetForm,
 				setData,
 				convo,
+				userid,
+				fetchUser,
 			}}
 		>
 			{children}

@@ -1,5 +1,5 @@
 import { BiSearch } from 'react-icons/bi';
-const Chats = () => {
+const Contacts = () => {
 	const keyEnter = (e) => {
 		return e.keyCode === 13 ? searchHandler() : '';
 	};
@@ -48,4 +48,4 @@ const Chats = () => {
 		</>
 	);
 };
-export default Chats;
+export default Contacts;

@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useRoutes } from 'react-router-dom';
+import { useContext } from 'react';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 
@@ -7,6 +8,8 @@ import Profile from './pages/Profile';
 import Login from './pages/Login.js';
 import Signup from './pages/Signup.js';
 import Messenger from './pages/Messenger.js';
+import RequiredAuth from './pages/RequiredAuth.js';
+
 function App() {
 	return (
 		<div className='max-w[1440px] mx-auto bg-white h-full min-h-screen'>
@@ -17,15 +20,6 @@ function App() {
 					element={<Home />}
 				/>
 				<Route
-					// path='/profile/:id'
-					path='/profile'
-					element={<Profile />}
-				/>
-				<Route
-					path='/messenger'
-					element={<Messenger />}
-				/>
-				<Route
 					path='/signup'
 					element={<Signup />}
 				/>
@@ -33,6 +27,17 @@ function App() {
 					path='/login'
 					element={<Login />}
 				/>
+				<Route element={<RequiredAuth />}>
+					<Route
+						path='/messenger'
+						element={<Messenger />}
+					/>
+					<Route
+						// path='/profile/:id'
+						path='/profile'
+						element={<Profile />}
+					/>
+				</Route>
 				<Route
 					path='*'
 					element={<Home />}

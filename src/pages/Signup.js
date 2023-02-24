@@ -7,6 +7,7 @@ const Signup = () => {
 	const navigate = useNavigate();
 	const { formData, handleChange, resetForm } = useContext(ChatContext);
 	useEffect(() => {
+		localStorage.removeItem('UserId');
 		resetForm();
 	}, []);
 
