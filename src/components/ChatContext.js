@@ -5,6 +5,7 @@ import axios from 'axios';
 export const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
+	const [search, setSearch] = useState('');
 	const userid = localStorage.getItem('UserId');
 	const [isLogin, setIsLogin] = useState(false);
 	const [textArea, setTextArea] = useState('');
@@ -85,8 +86,8 @@ const ChatContextProvider = ({ children }) => {
 			console.log(response);
 			if (success) {
 				//	setData(response.data);
-				// localStorage.removeItem('UserId');
-				// resetForm();
+				localStorage.removeItem('UserId');
+				resetForm();
 			}
 		} catch (err) {
 			console.log(err);
@@ -137,6 +138,8 @@ const ChatContextProvider = ({ children }) => {
 				userid,
 				fetchUser,
 				setUserOffline,
+				search,
+				setSearch,
 			}}
 		>
 			{children}
