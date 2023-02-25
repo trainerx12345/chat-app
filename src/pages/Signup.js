@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { ChatContext } from '../components/ChatContext';
 const Signup = () => {
 	const navigate = useNavigate();
-	const { formData, handleChange, resetForm } = useContext(ChatContext);
+	const { formData, handleChange, resetForm, setuserid } =
+		useContext(ChatContext);
 	useEffect(() => {
 		localStorage.removeItem('UserId');
 		resetForm();
@@ -23,17 +24,22 @@ const Signup = () => {
 		try {
 			const response = await axios.post(
 				'https://mechatapp-api.onrender.com/api/v1/auth/register',
+				//'http://localhost:8090/api/v1/auth/register',
 				{
 					email: formData.email,
 					password: formData.password,
 					name: formData.name,
 					phoneNumber: formData.phoneNo,
 					avatar: formData.url,
+					isOnline: true,
 				},
 			);
-			console.log(response);
 			const success = response.status === 201;
-			if (success) navigate('/messenger');
+			if (success) {
+				setuserid(response.data.userId);
+				localStorage.setItem('UserId', response.data.userId);
+				navigate('/messenger');
+			}
 		} catch (err) {
 			console.log(err);
 			const status = err.response.status;

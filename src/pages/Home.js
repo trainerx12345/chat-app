@@ -4,11 +4,11 @@ import { ChatContext } from '../components/ChatContext';
 import Image from '../assets/img/banner.jpg';
 
 const Home = () => {
-	const {} = useContext(ChatContext);
+	const { userid } = useContext(ChatContext);
 
 	const navigate = useNavigate();
 	const login = () => {
-		navigate('/login');
+		userid !== '' ? navigate('/messenger') : navigate('/login');
 	};
 	return (
 		<section className='container h-xl flex justify-center items-center'>

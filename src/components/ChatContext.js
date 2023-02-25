@@ -6,10 +6,15 @@ export const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
 	const [search, setSearch] = useState('');
-	const userid = localStorage.getItem('UserId');
+	const [userid, setuserid] = useState(localStorage.getItem('UserId'));
 	const [isLogin, setIsLogin] = useState(false);
 	const [textArea, setTextArea] = useState('');
-	const [convo, setConvo] = useState(true);
+	const [clickedUserId, setClickedUserId] = useState('');
+	const [convo, setConvo] = useState(false);
+	const [contacts, setContacts] = useState({
+		item: [],
+	});
+
 	const [formData, setFormData] = useState({
 		url: '',
 		name: '',
@@ -43,6 +48,7 @@ const ChatContextProvider = ({ children }) => {
 			isOnline: response.isOnline,
 			contacts: response.contacts,
 		});
+		setuserid(response._id);
 		localStorage.setItem('UserId', response._id);
 	};
 
@@ -50,62 +56,29 @@ const ChatContextProvider = ({ children }) => {
 		try {
 			const response = await axios.get(
 				`https://mechatapp-api.onrender.com/api/v1/user/${userid}`,
+				//`http://localhost:8090/api/v1/user/${userid}`,
 			);
-			console.log(response.data);
-
 			const success = response.status === 200;
 			if (success) {
 				setData(response.data);
 			}
 		} catch (err) {
 			console.log(err);
-			const status = err.response.status;
-			if (status === 404) {
-				console.log('No user Exist');
-				return;
-			}
-			if (status === 400) {
-				console.log('Incorrect password');
-				alert('Password is incorrect');
-				return;
-			}
-			if (status === 500) {
-				console.log('Server Error');
-				alert('server error');
-				return;
-			}
 		}
 	};
 	const setUserOffline = async () => {
 		try {
 			const response = await axios.put(
 				`https://mechatapp-api.onrender.com/api/v1/auth/offline/${userid}`,
+				//`http://localhost:8090/api/v1/auth/offline/${userid}`,
 			);
-
-			const success = response.status === 204;
-			console.log(response);
+			const success = response.status === 200;
 			if (success) {
-				//	setData(response.data);
 				localStorage.removeItem('UserId');
 				resetForm();
 			}
 		} catch (err) {
 			console.log(err);
-			const status = err.response.status;
-			if (status === 404) {
-				console.log('No user Exist');
-				return;
-			}
-			if (status === 400) {
-				console.log('Incorrect password');
-				alert('Password is incorrect');
-				return;
-			}
-			if (status === 500) {
-				console.log('Server Error');
-				alert('server error');
-				return;
-			}
 		}
 	};
 
@@ -119,8 +92,6 @@ const ChatContextProvider = ({ children }) => {
 		}));
 	};
 
-	const addMessageHandler = (message) => {};
-
 	return (
 		<ChatContext.Provider
 			value={{
@@ -129,17 +100,22 @@ const ChatContextProvider = ({ children }) => {
 				handleChange,
 				isLogin,
 				setIsLogin,
-				addMessageHandler,
-				textArea,
-				setTextArea,
 				resetForm,
 				setData,
-				convo,
+				textArea,
+				setTextArea,
 				userid,
 				fetchUser,
-				setUserOffline,
 				search,
 				setSearch,
+				setuserid,
+				setUserOffline,
+				contacts,
+				setContacts,
+				clickedUserId,
+				setClickedUserId,
+				convo,
+				setConvo,
 			}}
 		>
 			{children}

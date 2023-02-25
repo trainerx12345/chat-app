@@ -12,7 +12,7 @@ import RequiredAuth from './pages/RequiredAuth.js';
 
 function App() {
 	return (
-		<div className='max-w[1440px] mx-auto bg-white h-full min-h-screen'>
+		<div className='max-w-[1440px] mx-auto bg-white h-screen'>
 			<Header />
 			<Routes>
 				<Route

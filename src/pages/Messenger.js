@@ -1,38 +1,21 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ChatContext } from '../components/ChatContext';
 
 import Contacts from '../components/Contacts';
-import ChatContent from '../components/ChatContent';
-import ChatInput from '../components/ChatInput';
+
 const Messenger = () => {
-	const { formData, convo, userid, fetchUser } = useContext(ChatContext);
+	const { formData, userid, fetchUser } = useContext(ChatContext);
 
 	useEffect(() => {
 		if (userid !== '') {
 			fetchUser();
 		}
-		console.log(formData);
-		return;
-	}, []);
+	}, [userid]);
 
 	return (
-		<>
-			<div className='container flex flex-col w-full sm:mx-auto bg-violet-200 h-full sm:h-[500px] sm:py-3'>
-				<div className='flex flex-col  sm:flex-row sm:h-full sm:[h-1000px]'>
-					<div className='w-full sm:max-w-[250px] bg-green-100'>
-						<Contacts />
-					</div>
-					{convo === false ? (
-						<></>
-					) : (
-						<div className='flex-row sm:flex-col w-full gap-5 bg-green-400 hidden sm:flex'>
-							<ChatContent />
-							<ChatInput />
-						</div>
-					)}
-				</div>
-			</div>
-		</>
+		<div className='container flex flex-col w-full sm:mx-auto h-xd sm:py-3'>
+			<Contacts />
+		</div>
 	);
 };
 export default Messenger;
