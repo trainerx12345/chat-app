@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { ChatContext } from './ChatContext';
 import ChatInput from '../components/ChatInput';
 
@@ -10,8 +10,9 @@ const ChatContent = ({
 	getChats,
 }) => {
 	const { userid, formData, clickedUserId } = useContext(ChatContext);
+	
 	useEffect(() => {
-		// console.log(descendingOrderMessages, 'ChatContent');
+		descendingOrderMessages();
 	}, []);
 
 	return (

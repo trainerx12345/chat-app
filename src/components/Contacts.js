@@ -27,6 +27,7 @@ const Contacts = () => {
 	const messages = [];
 	let [descendingOrderMessages, setDescendingOrderMessages] = useState([]);
 	const [searchUser, setSearchUser] = useState([]);
+
 	const getChats = () => {
 		if (usersMessages.length > 0) {
 			usersMessages.map((value, ind) => {
@@ -48,7 +49,6 @@ const Contacts = () => {
 		setDescendingOrderMessages(
 			messages?.sort((a, b) => a.timestamp.localeCompare(b.timestamp)),
 		);
-		console.log(descendingOrderMessages);
 	};
 
 	const fetchContacts = () => {
@@ -66,7 +66,6 @@ const Contacts = () => {
 					}
 				} catch (err) {
 					console.log(err);
-					const status = err.response.status;
 				}
 			});
 		}
@@ -175,7 +174,6 @@ const Contacts = () => {
 
 	useEffect(() => {
 		clearHandler();
-		fetchContacts();
 	}, []);
 
 	return (
